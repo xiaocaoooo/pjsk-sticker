@@ -1,0 +1,56 @@
+name: pjsk_sticker
+description: "A new Flutter project."
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_colorpicker: ^1.0.3
+  cupertino_icons: ^1.0.8
+  dynamic_color: ^1.7.0
+  path_provider: ^2.0.1
+  pasteboard: ^0.4.0
+  share_plus: ^11.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/characters/airi/
+    - assets/characters/akito/
+    - assets/characters/an/
+    - assets/characters/emu/
+    - assets/characters/ena/
+    - assets/characters/haruka/
+    - assets/characters/honami/
+    - assets/characters/ichika/
+    - assets/characters/kaito/
+    - assets/characters/kanade/
+    - assets/characters/kohane/
+    - assets/characters/len/
+    - assets/characters/luka/
+    - assets/characters/mafuyu/
+    - assets/characters/meiko/
+    - assets/characters/miku/
+    - assets/characters/minori/
+    - assets/characters/mizuki/
+    - assets/characters/nene/
+    - assets/characters/rin/
+    - assets/characters/rui/
+    - assets/characters/saki/
+    - assets/characters/shiho/
+    - assets/characters/shizuku/
+    - assets/characters/touya/
+    - assets/characters/tsukasa/
+    - Fonts/ShangShouFangTangTi.ttf
+    - Fonts/YurukaStd.ttf
