@@ -13,8 +13,11 @@ dependencies:
   flutter_colorpicker: ^1.0.3
   cupertino_icons: ^1.0.8
   dynamic_color: ^1.7.0
+  http: ^1.4.0
+  ionicons: ^0.2.2
   path_provider: ^2.0.1
-  pasteboard: ^0.4.0
+  # pasteboard: ^0.4.0
+  url_launcher: ^6.3.2
   share_plus: ^11.0.0
 
 dev_dependencies:

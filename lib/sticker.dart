@@ -1,8 +1,7 @@
-import 'dart:io';
-import 'dart:ui' as ui;
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
+import "dart:math";
+import "dart:ui" as ui;
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
 
 class PjskGenerator {
   static final List<String> groups = [
@@ -68,421 +67,421 @@ class PjskGenerator {
   };
 
   static final Map<String, List<String>> characterStickers = {
-    'airi': [
-      'airi_01.png',
-      'airi_02.png',
-      'airi_03.png',
-      'airi_04.png',
-      'airi_06.png',
-      'airi_07.png',
-      'airi_08.png',
-      'airi_09.png',
-      'airi_11.png',
-      'airi_12.png',
-      'airi_13.png',
-      'airi_14.png',
-      'airi_16.png',
-      'airi_17.png',
-      'airi_18.png',
+    "airi": [
+      "airi_01.png",
+      "airi_02.png",
+      "airi_03.png",
+      "airi_04.png",
+      "airi_06.png",
+      "airi_07.png",
+      "airi_08.png",
+      "airi_09.png",
+      "airi_11.png",
+      "airi_12.png",
+      "airi_13.png",
+      "airi_14.png",
+      "airi_16.png",
+      "airi_17.png",
+      "airi_18.png",
     ],
-    'akito': [
-      'akito_01.png',
-      'akito_02.png',
-      'akito_03.png',
-      'akito_04.png',
-      'akito_06.png',
-      'akito_07.png',
-      'akito_08.png',
-      'akito_09.png',
-      'akito_11.png',
-      'akito_12.png',
-      'akito_13.png',
-      'akito_14.png',
-      'akito_16.png',
+    "akito": [
+      "akito_01.png",
+      "akito_02.png",
+      "akito_03.png",
+      "akito_04.png",
+      "akito_06.png",
+      "akito_07.png",
+      "akito_08.png",
+      "akito_09.png",
+      "akito_11.png",
+      "akito_12.png",
+      "akito_13.png",
+      "akito_14.png",
+      "akito_16.png",
     ],
-    'an': [
-      'an_01.png',
-      'an_02.png',
-      'an_03.png',
-      'an_04.png',
-      'an_06.png',
-      'an_07.png',
-      'an_08.png',
-      'an_09.png',
-      'an_11.png',
-      'an_12.png',
-      'an_13.png',
-      'an_14.png',
-      'an_16.png',
+    "an": [
+      "an_01.png",
+      "an_02.png",
+      "an_03.png",
+      "an_04.png",
+      "an_06.png",
+      "an_07.png",
+      "an_08.png",
+      "an_09.png",
+      "an_11.png",
+      "an_12.png",
+      "an_13.png",
+      "an_14.png",
+      "an_16.png",
     ],
-    'emu': [
-      'emu_01.png',
-      'emu_02.png',
-      'emu_03.png',
-      'emu_04.png',
-      'emu_06.png',
-      'emu_07.png',
-      'emu_08.png',
-      'emu_09.png',
-      'emu_11.png',
-      'emu_12.png',
-      'emu_13.png',
-      'emu_14.png',
-      'emu_16.png',
+    "emu": [
+      "emu_01.png",
+      "emu_02.png",
+      "emu_03.png",
+      "emu_04.png",
+      "emu_06.png",
+      "emu_07.png",
+      "emu_08.png",
+      "emu_09.png",
+      "emu_11.png",
+      "emu_12.png",
+      "emu_13.png",
+      "emu_14.png",
+      "emu_16.png",
     ],
-    'ena': [
-      'ena_01.png',
-      'ena_02.png',
-      'ena_03.png',
-      'ena_04.png',
-      'ena_06.png',
-      'ena_07.png',
-      'ena_08.png',
-      'ena_09.png',
-      'ena_11.png',
-      'ena_12.png',
-      'ena_13.png',
-      'ena_14.png',
-      'ena_16.png',
-      'ena_17.png',
-      'ena_18.png',
-      'ena_19.png',
+    "ena": [
+      "ena_01.png",
+      "ena_02.png",
+      "ena_03.png",
+      "ena_04.png",
+      "ena_06.png",
+      "ena_07.png",
+      "ena_08.png",
+      "ena_09.png",
+      "ena_11.png",
+      "ena_12.png",
+      "ena_13.png",
+      "ena_14.png",
+      "ena_16.png",
+      "ena_17.png",
+      "ena_18.png",
+      "ena_19.png",
     ],
-    'haruka': [
-      'haruka_01.png',
-      'haruka_02.png',
-      'haruka_03.png',
-      'haruka_04.png',
-      'haruka_06.png',
-      'haruka_07.png',
-      'haruka_08.png',
-      'haruka_09.png',
-      'haruka_11.png',
-      'haruka_12.png',
-      'haruka_13.png',
-      'haruka_14.png',
-      'haruka_16.png',
+    "haruka": [
+      "haruka_01.png",
+      "haruka_02.png",
+      "haruka_03.png",
+      "haruka_04.png",
+      "haruka_06.png",
+      "haruka_07.png",
+      "haruka_08.png",
+      "haruka_09.png",
+      "haruka_11.png",
+      "haruka_12.png",
+      "haruka_13.png",
+      "haruka_14.png",
+      "haruka_16.png",
     ],
-    'honami': [
-      'honami_01.png',
-      'honami_02.png',
-      'honami_03.png',
-      'honami_04.png',
-      'honami_06.png',
-      'honami_07.png',
-      'honami_08.png',
-      'honami_09.png',
-      'honami_11.png',
-      'honami_12.png',
-      'honami_13.png',
-      'honami_14.png',
-      'honami_16.png',
-      'honami_17.png',
-      'honami_18.png',
+    "honami": [
+      "honami_01.png",
+      "honami_02.png",
+      "honami_03.png",
+      "honami_04.png",
+      "honami_06.png",
+      "honami_07.png",
+      "honami_08.png",
+      "honami_09.png",
+      "honami_11.png",
+      "honami_12.png",
+      "honami_13.png",
+      "honami_14.png",
+      "honami_16.png",
+      "honami_17.png",
+      "honami_18.png",
     ],
-    'ichika': [
-      'ichika_01.png',
-      'ichika_02.png',
-      'ichika_03.png',
-      'ichika_04.png',
-      'ichika_06.png',
-      'ichika_07.png',
-      'ichika_08.png',
-      'ichika_09.png',
-      'ichika_11.png',
-      'ichika_12.png',
-      'ichika_13.png',
-      'ichika_14.png',
-      'ichika_16.png',
-      'ichika_17.png',
-      'ichika_18.png',
+    "ichika": [
+      "ichika_01.png",
+      "ichika_02.png",
+      "ichika_03.png",
+      "ichika_04.png",
+      "ichika_06.png",
+      "ichika_07.png",
+      "ichika_08.png",
+      "ichika_09.png",
+      "ichika_11.png",
+      "ichika_12.png",
+      "ichika_13.png",
+      "ichika_14.png",
+      "ichika_16.png",
+      "ichika_17.png",
+      "ichika_18.png",
     ],
-    'kaito': [
-      'kaito_01.png',
-      'kaito_02.png',
-      'kaito_03.png',
-      'kaito_04.png',
-      'kaito_06.png',
-      'kaito_07.png',
-      'kaito_08.png',
-      'kaito_09.png',
-      'kaito_11.png',
-      'kaito_12.png',
-      'kaito_13.png',
-      'kaito_14.png',
-      'kaito_16.png',
+    "kaito": [
+      "kaito_01.png",
+      "kaito_02.png",
+      "kaito_03.png",
+      "kaito_04.png",
+      "kaito_06.png",
+      "kaito_07.png",
+      "kaito_08.png",
+      "kaito_09.png",
+      "kaito_11.png",
+      "kaito_12.png",
+      "kaito_13.png",
+      "kaito_14.png",
+      "kaito_16.png",
     ],
-    'kanade': [
-      'kanade_01.png',
-      'kanade_02.png',
-      'kanade_03.png',
-      'kanade_04.png',
-      'kanade_06.png',
-      'kanade_07.png',
-      'kanade_08.png',
-      'kanade_09.png',
-      'kanade_11.png',
-      'kanade_12.png',
-      'kanade_13.png',
-      'kanade_14.png',
-      'kanade_16.png',
-      'kanade_17.png',
+    "kanade": [
+      "kanade_01.png",
+      "kanade_02.png",
+      "kanade_03.png",
+      "kanade_04.png",
+      "kanade_06.png",
+      "kanade_07.png",
+      "kanade_08.png",
+      "kanade_09.png",
+      "kanade_11.png",
+      "kanade_12.png",
+      "kanade_13.png",
+      "kanade_14.png",
+      "kanade_16.png",
+      "kanade_17.png",
     ],
-    'kohane': [
-      'kohane_01.png',
-      'kohane_02.png',
-      'kohane_03.png',
-      'kohane_04.png',
-      'kohane_06.png',
-      'kohane_07.png',
-      'kohane_08.png',
-      'kohane_09.png',
-      'kohane_11.png',
-      'kohane_12.png',
-      'kohane_13.png',
-      'kohane_14.png',
-      'kohane_16.png',
-      'kohane_17.png',
+    "kohane": [
+      "kohane_01.png",
+      "kohane_02.png",
+      "kohane_03.png",
+      "kohane_04.png",
+      "kohane_06.png",
+      "kohane_07.png",
+      "kohane_08.png",
+      "kohane_09.png",
+      "kohane_11.png",
+      "kohane_12.png",
+      "kohane_13.png",
+      "kohane_14.png",
+      "kohane_16.png",
+      "kohane_17.png",
     ],
-    'len': [
-      'len_01.png',
-      'len_02.png',
-      'len_03.png',
-      'len_04.png',
-      'len_06.png',
-      'len_07.png',
-      'len_08.png',
-      'len_09.png',
-      'len_11.png',
-      'len_12.png',
-      'len_13.png',
-      'len_14.png',
-      'len_16.png',
-      'len_17.png',
+    "len": [
+      "len_01.png",
+      "len_02.png",
+      "len_03.png",
+      "len_04.png",
+      "len_06.png",
+      "len_07.png",
+      "len_08.png",
+      "len_09.png",
+      "len_11.png",
+      "len_12.png",
+      "len_13.png",
+      "len_14.png",
+      "len_16.png",
+      "len_17.png",
     ],
-    'luka': [
-      'luka_01.png',
-      'luka_02.png',
-      'luka_03.png',
-      'luka_04.png',
-      'luka_06.png',
-      'luka_07.png',
-      'luka_08.png',
-      'luka_09.png',
-      'luka_11.png',
-      'luka_12.png',
-      'luka_13.png',
-      'luka_14.png',
-      'luka_16.png',
+    "luka": [
+      "luka_01.png",
+      "luka_02.png",
+      "luka_03.png",
+      "luka_04.png",
+      "luka_06.png",
+      "luka_07.png",
+      "luka_08.png",
+      "luka_09.png",
+      "luka_11.png",
+      "luka_12.png",
+      "luka_13.png",
+      "luka_14.png",
+      "luka_16.png",
     ],
-    'mafuyu': [
-      'mafuyu_01.png',
-      'mafuyu_02.png',
-      'mafuyu_03.png',
-      'mafuyu_04.png',
-      'mafuyu_06.png',
-      'mafuyu_07.png',
-      'mafuyu_08.png',
-      'mafuyu_09.png',
-      'mafuyu_11.png',
-      'mafuyu_12.png',
-      'mafuyu_13.png',
-      'mafuyu_14.png',
-      'mafuyu_16.png',
-      'mafuyu_17.png',
+    "mafuyu": [
+      "mafuyu_01.png",
+      "mafuyu_02.png",
+      "mafuyu_03.png",
+      "mafuyu_04.png",
+      "mafuyu_06.png",
+      "mafuyu_07.png",
+      "mafuyu_08.png",
+      "mafuyu_09.png",
+      "mafuyu_11.png",
+      "mafuyu_12.png",
+      "mafuyu_13.png",
+      "mafuyu_14.png",
+      "mafuyu_16.png",
+      "mafuyu_17.png",
     ],
-    'meiko': [
-      'meiko_01.png',
-      'meiko_02.png',
-      'meiko_03.png',
-      'meiko_04.png',
-      'meiko_06.png',
-      'meiko_07.png',
-      'meiko_08.png',
-      'meiko_09.png',
-      'meiko_11.png',
-      'meiko_12.png',
-      'meiko_13.png',
-      'meiko_14.png',
-      'meiko_16.png',
+    "meiko": [
+      "meiko_01.png",
+      "meiko_02.png",
+      "meiko_03.png",
+      "meiko_04.png",
+      "meiko_06.png",
+      "meiko_07.png",
+      "meiko_08.png",
+      "meiko_09.png",
+      "meiko_11.png",
+      "meiko_12.png",
+      "meiko_13.png",
+      "meiko_14.png",
+      "meiko_16.png",
     ],
-    'miku': [
-      'miku_01.png',
-      'miku_02.png',
-      'miku_03.png',
-      'miku_04.png',
-      'miku_06.png',
-      'miku_07.png',
-      'miku_08.png',
-      'miku_09.png',
-      'miku_11.png',
-      'miku_12.png',
-      'miku_13.png',
-      'miku_14.png',
-      'miku_16.png',
+    "miku": [
+      "miku_01.png",
+      "miku_02.png",
+      "miku_03.png",
+      "miku_04.png",
+      "miku_06.png",
+      "miku_07.png",
+      "miku_08.png",
+      "miku_09.png",
+      "miku_11.png",
+      "miku_12.png",
+      "miku_13.png",
+      "miku_14.png",
+      "miku_16.png",
     ],
-    'minori': [
-      'minori_01.png',
-      'minori_02.png',
-      'minori_03.png',
-      'minori_04.png',
-      'minori_06.png',
-      'minori_07.png',
-      'minori_08.png',
-      'minori_09.png',
-      'minori_11.png',
-      'minori_12.png',
-      'minori_13.png',
-      'minori_14.png',
-      'minori_16.png',
-      'minori_17.png',
+    "minori": [
+      "minori_01.png",
+      "minori_02.png",
+      "minori_03.png",
+      "minori_04.png",
+      "minori_06.png",
+      "minori_07.png",
+      "minori_08.png",
+      "minori_09.png",
+      "minori_11.png",
+      "minori_12.png",
+      "minori_13.png",
+      "minori_14.png",
+      "minori_16.png",
+      "minori_17.png",
     ],
-    'mizuki': [
-      'mizuki_01.png',
-      'mizuki_02.png',
-      'mizuki_03.png',
-      'mizuki_04.png',
-      'mizuki_06.png',
-      'mizuki_07.png',
-      'mizuki_08.png',
-      'mizuki_09.png',
-      'mizuki_11.png',
-      'mizuki_12.png',
-      'mizuki_13.png',
-      'mizuki_14.png',
-      'mizuki_16.png',
-      'mizuki_17.png',
+    "mizuki": [
+      "mizuki_01.png",
+      "mizuki_02.png",
+      "mizuki_03.png",
+      "mizuki_04.png",
+      "mizuki_06.png",
+      "mizuki_07.png",
+      "mizuki_08.png",
+      "mizuki_09.png",
+      "mizuki_11.png",
+      "mizuki_12.png",
+      "mizuki_13.png",
+      "mizuki_14.png",
+      "mizuki_16.png",
+      "mizuki_17.png",
     ],
-    'nene': [
-      'nene_01.png',
-      'nene_02.png',
-      'nene_03.png',
-      'nene_04.png',
-      'nene_06.png',
-      'nene_07.png',
-      'nene_08.png',
-      'nene_09.png',
-      'nene_11.png',
-      'nene_12.png',
-      'nene_13.png',
-      'nene_14.png',
-      'nene_16.png',
+    "nene": [
+      "nene_01.png",
+      "nene_02.png",
+      "nene_03.png",
+      "nene_04.png",
+      "nene_06.png",
+      "nene_07.png",
+      "nene_08.png",
+      "nene_09.png",
+      "nene_11.png",
+      "nene_12.png",
+      "nene_13.png",
+      "nene_14.png",
+      "nene_16.png",
     ],
-    'rin': [
-      'rin_01.png',
-      'rin_02.png',
-      'rin_03.png',
-      'rin_04.png',
-      'rin_06.png',
-      'rin_07.png',
-      'rin_08.png',
-      'rin_09.png',
-      'rin_11.png',
-      'rin_12.png',
-      'rin_13.png',
-      'rin_14.png',
-      'rin_16.png',
+    "rin": [
+      "rin_01.png",
+      "rin_02.png",
+      "rin_03.png",
+      "rin_04.png",
+      "rin_06.png",
+      "rin_07.png",
+      "rin_08.png",
+      "rin_09.png",
+      "rin_11.png",
+      "rin_12.png",
+      "rin_13.png",
+      "rin_14.png",
+      "rin_16.png",
     ],
-    'rui': [
-      'rui_01.png',
-      'rui_02.png',
-      'rui_03.png',
-      'rui_04.png',
-      'rui_06.png',
-      'rui_07.png',
-      'rui_08.png',
-      'rui_09.png',
-      'rui_11.png',
-      'rui_12.png',
-      'rui_13.png',
-      'rui_14.png',
-      'rui_16.png',
-      'rui_17.png',
-      'rui_18.png',
-      'rui_19.png',
+    "rui": [
+      "rui_01.png",
+      "rui_02.png",
+      "rui_03.png",
+      "rui_04.png",
+      "rui_06.png",
+      "rui_07.png",
+      "rui_08.png",
+      "rui_09.png",
+      "rui_11.png",
+      "rui_12.png",
+      "rui_13.png",
+      "rui_14.png",
+      "rui_16.png",
+      "rui_17.png",
+      "rui_18.png",
+      "rui_19.png",
     ],
-    'saki': [
-      'saki_01.png',
-      'saki_02.png',
-      'saki_03.png',
-      'saki_04.png',
-      'saki_06.png',
-      'saki_07.png',
-      'saki_08.png',
-      'saki_09.png',
-      'saki_11.png',
-      'saki_12.png',
-      'saki_13.png',
-      'saki_14.png',
-      'saki_16.png',
-      'saki_17.png',
-      'saki_18.png',
+    "saki": [
+      "saki_01.png",
+      "saki_02.png",
+      "saki_03.png",
+      "saki_04.png",
+      "saki_06.png",
+      "saki_07.png",
+      "saki_08.png",
+      "saki_09.png",
+      "saki_11.png",
+      "saki_12.png",
+      "saki_13.png",
+      "saki_14.png",
+      "saki_16.png",
+      "saki_17.png",
+      "saki_18.png",
     ],
-    'shiho': [
-      'shiho_01.png',
-      'shiho_02.png',
-      'shiho_03.png',
-      'shiho_04.png',
-      'shiho_06.png',
-      'shiho_07.png',
-      'shiho_08.png',
-      'shiho_09.png',
-      'shiho_11.png',
-      'shiho_12.png',
-      'shiho_13.png',
-      'shiho_14.png',
-      'shiho_16.png',
-      'shiho_17.png',
-      'shiho_18.png',
+    "shiho": [
+      "shiho_01.png",
+      "shiho_02.png",
+      "shiho_03.png",
+      "shiho_04.png",
+      "shiho_06.png",
+      "shiho_07.png",
+      "shiho_08.png",
+      "shiho_09.png",
+      "shiho_11.png",
+      "shiho_12.png",
+      "shiho_13.png",
+      "shiho_14.png",
+      "shiho_16.png",
+      "shiho_17.png",
+      "shiho_18.png",
     ],
-    'shizuku': [
-      'shizuku_01.png',
-      'shizuku_02.png',
-      'shizuku_03.png',
-      'shizuku_04.png',
-      'shizuku_06.png',
-      'shizuku_07.png',
-      'shizuku_08.png',
-      'shizuku_09.png',
-      'shizuku_11.png',
-      'shizuku_12.png',
-      'shizuku_13.png',
-      'shizuku_14.png',
-      'shizuku_16.png',
+    "shizuku": [
+      "shizuku_01.png",
+      "shizuku_02.png",
+      "shizuku_03.png",
+      "shizuku_04.png",
+      "shizuku_06.png",
+      "shizuku_07.png",
+      "shizuku_08.png",
+      "shizuku_09.png",
+      "shizuku_11.png",
+      "shizuku_12.png",
+      "shizuku_13.png",
+      "shizuku_14.png",
+      "shizuku_16.png",
     ],
-    'touya': [
-      'touya_01.png',
-      'touya_02.png',
-      'touya_03.png',
-      'touya_04.png',
-      'touya_06.png',
-      'touya_07.png',
-      'touya_08.png',
-      'touya_09.png',
-      'touya_11.png',
-      'touya_12.png',
-      'touya_13.png',
-      'touya_14.png',
-      'touya_16.png',
-      'touya_17.png',
-      'touya_18.png',
+    "touya": [
+      "touya_01.png",
+      "touya_02.png",
+      "touya_03.png",
+      "touya_04.png",
+      "touya_06.png",
+      "touya_07.png",
+      "touya_08.png",
+      "touya_09.png",
+      "touya_11.png",
+      "touya_12.png",
+      "touya_13.png",
+      "touya_14.png",
+      "touya_16.png",
+      "touya_17.png",
+      "touya_18.png",
     ],
-    'tsukasa': [
-      'tsukasa_01.png',
-      'tsukasa_02.png',
-      'tsukasa_03.png',
-      'tsukasa_04.png',
-      'tsukasa_06.png',
-      'tsukasa_07.png',
-      'tsukasa_08.png',
-      'tsukasa_09.png',
-      'tsukasa_11.png',
-      'tsukasa_12.png',
-      'tsukasa_13.png',
-      'tsukasa_14.png',
-      'tsukasa_16.png',
-      'tsukasa_17.png',
-      'tsukasa_18.png',
+    "tsukasa": [
+      "tsukasa_01.png",
+      "tsukasa_02.png",
+      "tsukasa_03.png",
+      "tsukasa_04.png",
+      "tsukasa_06.png",
+      "tsukasa_07.png",
+      "tsukasa_08.png",
+      "tsukasa_09.png",
+      "tsukasa_11.png",
+      "tsukasa_12.png",
+      "tsukasa_13.png",
+      "tsukasa_14.png",
+      "tsukasa_16.png",
+      "tsukasa_17.png",
+      "tsukasa_18.png",
     ],
   };
 
@@ -573,17 +572,7 @@ class PjskGenerator {
     "tsukasa",
   ];
 
-  static final List<Offset> offsets = [
-    // (0,0)为中心 8个方向
-    Offset(0, 1),
-    Offset(1, 1),
-    Offset(1, 0),
-    Offset(1, -1),
-    Offset(0, -1),
-    Offset(-1, -1),
-    Offset(-1, 0),
-    Offset(-1, 1),
-  ];
+  static final List<String> fonts = ["YurukaStd", "ShangShouFangTangTi"];
 
   static Future<Uint8List> pjsk({
     required String content,
@@ -603,8 +592,8 @@ class PjskGenerator {
 
     // 确定角色和图片路径
     String characterName = character.toLowerCase().replaceAll(
-      RegExp(r'[^a-z]'),
-      '',
+      RegExp(r"[^a-z]"),
+      "",
     );
     characterName =
         characterList.contains(characterName)
@@ -612,7 +601,7 @@ class PjskGenerator {
             : characterList[DateTime.now().millisecond % characterList.length];
 
     // 处理角色编号
-    String charNumber = character.replaceAll(RegExp(r'[^0-9]'), '');
+    String charNumber = character.replaceAll(RegExp(r"[^0-9]"), "");
     int? charNum = int.tryParse(charNumber);
     if (charNum == null ||
         charNum <= 0 ||
@@ -627,11 +616,11 @@ class PjskGenerator {
     }
 
     final charPath =
-        'assets/characters/$characterName/${characterName}_${charNum.toString().padLeft(2, '0')}.png';
+        "assets/characters/$characterName/${characterName}_${charNum.toString().padLeft(2, "0")}.png";
 
     // 创建临时目录
     // final tempDir = await getTemporaryDirectory();
-    // final outputFile = File('${tempDir.path}/$fileName');
+    // final outputFile = File("${tempDir.path}/$fileName");
 
     // 加载背景图片
     final bgImage = await _loadImage(charPath);
@@ -648,11 +637,10 @@ class PjskGenerator {
       edgeSize: edgeSize,
       font: font,
       color: fontColor,
-      lean: lean,
     );
 
     // 合成最终图片
-    final image = await _compositeImages(bgImage, textPainter, pos);
+    final image = await _compositeImages(bgImage, textPainter, pos, lean);
     final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     // await outputFile.writeAsBytes(byteData!.buffer.asUint8List());
     // print(outputFile.path);
@@ -672,23 +660,23 @@ class PjskGenerator {
     required int edgeSize,
     required int font,
     required Color color,
-    required double lean,
   }) async {
     // 加载字体
-    final fontLoader =
-        font == 1 ? 'Fonts/ShangShouFangTangTi.ttf' : 'Fonts/YurukaStd.ttf';
+    // final fontLoader =
+    //     font == 1 ? "Fonts/ShangShouFangTangTi.ttf" : "Fonts/YurukaStd.ttf";
+    final fontLoader = "Fonts/${fonts[font]}.ttf";
 
     final fontData = await rootBundle.load(fontLoader);
-    final fontProvider = FontLoader('customFont')
+    final fontProvider = FontLoader(fonts[font])
       ..addFont(Future.value(fontData));
     await fontProvider.load();
 
     final textStyle = TextStyle(
-      fontFamily: 'customFont',
+      fontFamily: fonts[font],
       fontSize: fontSize,
       color: color,
       shadows:
-          offsets
+          getOffsets(360)
               .map(
                 (offset) => Shadow(
                   color: Colors.white, // 阴影颜色
@@ -700,7 +688,7 @@ class PjskGenerator {
     );
 
     // 计算文本尺寸
-    final lines = content.split('\n');
+    final lines = content.split("\n");
     double maxWidth = 0;
     // double totalHeight = 0;
 
@@ -715,9 +703,11 @@ class PjskGenerator {
     }
 
     // 创建文本绘制器
+    // 创建文本绘制器时添加旋转矩阵
     final painter = TextPainter(
       text: TextSpan(text: content, style: textStyle),
       textDirection: TextDirection.ltr,
+      textAlign: TextAlign.center,
     )..layout(maxWidth: maxWidth);
 
     return painter;
@@ -727,6 +717,7 @@ class PjskGenerator {
     ui.Image bgImage,
     TextPainter textPainter,
     Offset position,
+    double lean,
   ) async {
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
@@ -734,19 +725,48 @@ class PjskGenerator {
     // 绘制背景
     canvas.drawImage(bgImage, Offset.zero, Paint());
 
+    canvas.save();
+
     // 绘制文本
-    final textOffset = position;
-    textPainter.paint(canvas, textOffset);
+    // 调整旋转中心点到文本中心
+    final center = Offset(textPainter.width / 2, textPainter.height / 2);
+    canvas.translate(center.dx, center.dy); // 移动原点到中心
+    canvas.rotate(-lean * pi / 180); // 旋转画布
+
+    // 绘制文本（基于新原点）
+    textPainter.paint(
+      canvas,
+      Offset(-textPainter.width / 2, -textPainter.height / 2) + position,
+    );
+
+    // 恢复画布状态
+    canvas.restore();
 
     final picture = recorder.endRecording();
     return await picture.toImage(bgImage.width, bgImage.height);
   }
 
-  static void printAvailableAssets() async {
-    // final manifest = await rootBundle.loadString('AssetManifest.json');
-    // final json = jsonDecode(manifest) as Map<String, dynamic>;
-    // final paths = json.keys.where((k) => k.contains('characters/')).toList();
-    // print('Available character assets:');
-    // paths.forEach(print);
+  static List<Offset> getOffsets(int precision) {
+    assert(precision > 0);
+    // 半径为1，平分周角为precision份
+    // 例如precision为8
+    // 输出为 [
+    //   Offset(0, 1),
+    //   Offset(1, 1),
+    //   Offset(1, 0),
+    //   Offset(1, -1),
+    //   Offset(0, -1),
+    //   Offset(-1, -1),
+    //   Offset(-1, 0),
+    //   Offset(-1, 1),
+    // ]
+    List<Offset> offsets = [];
+    for (int i = 0; i < precision; i++) {
+      final angle = 2 * pi * i / precision;
+      final x = cos(angle);
+      final y = sin(angle);
+      offsets.add(Offset(x, y));
+    }
+    return offsets;
   }
 }

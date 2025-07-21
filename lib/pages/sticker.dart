@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:pasteboard/pasteboard.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:pjsk_sticker/pages/about.dart';
 import 'package:pjsk_sticker/sticker.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -12,13 +13,19 @@ class StickerPage extends StatefulWidget {
 }
 
 class _StickerPageState extends State<StickerPage> {
-  final TextEditingController _contextController = TextEditingController();
+  final TextEditingController _contextController = TextEditingController(
+    text: "わんだほーい",
+  );
   String? _selectedGroup;
-  String? _selectedCharacter;
-  int _selectedSticker = -1;
+  String? _selectedCharacter = "emu";
+  int _selectedSticker = 14;
   bool _selected = false;
-  String _character = "随机";
+  String _character = "emu";
   Uint8List? _byteData;
+  int _font = 0;
+  Offset _pos = Offset(20, 10);
+  double _fontSize = 42;
+  int _edgeSize = 4;
   // int _time = 0;
 
   @override
@@ -40,8 +47,15 @@ class _StickerPageState extends State<StickerPage> {
       character = '$character$_selectedSticker';
     }
     // _file = await PjskGenerator.pjsk(content: content, character: character);
-    _byteData = await PjskGenerator.pjsk(content: content, character: character);
-  
+    _byteData = await PjskGenerator.pjsk(
+      content: content,
+      character: character,
+      font: _font,
+      pos: _pos,
+      fontSize: _fontSize,
+      edgeSize: _edgeSize,
+    );
+
     // _time++;
     setState(() {});
   }
@@ -431,13 +445,32 @@ class _StickerPageState extends State<StickerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Project Sekai Sticker')),
+      appBar: AppBar(
+        title: Text('Project Sekai Sticker'),
+        actions: [
+          IconButton(
+            icon: Icon(Ionicons.information_circle),
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const AboutPage(),
+                ),
+              );
+              await _createSticker();
+            },
+          ),
+        ],
+      ),
       body: ListView(
         children: [
           ListTile(
             title: TextField(
               controller: _contextController,
               decoration: const InputDecoration(labelText: '内容'),
+              maxLines: null,
+              keyboardType: TextInputType.multiline,
+              textInputAction: TextInputAction.newline,
               onChanged: (context) {
                 _createSticker();
               },
@@ -451,6 +484,190 @@ class _StickerPageState extends State<StickerPage> {
               child: Text('角色: $_character'),
             ),
           ),
+          ListTile(
+            title: DropdownButtonFormField<int>(
+              decoration: InputDecoration(labelText: '字体'),
+              value: _font,
+              icon: Icon(
+                Ionicons.chevron_down, // 使用Ionicons图标（需导入ionicons包）
+              ),
+              items: [
+                for (int i = 0; i < PjskGenerator.fonts.length; i++)
+                  DropdownMenuItem<int>(
+                    value: i,
+                    child: Text(PjskGenerator.fonts[i]),
+                  ),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  _font = value!;
+                });
+                _createSticker();
+              },
+            ),
+          ),
+          ListTile(
+            leading: InkWell(
+              child: Text('X轴位置'),
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    final posController = TextEditingController();
+                    posController.text = _pos.dx.round().toString();
+                    return AlertDialog(
+                      title: Text('X轴位置'),
+                      content: TextField(
+                        controller: posController,
+                        decoration: const InputDecoration(labelText: 'X轴位置'),
+                      ),
+                      actions: [
+                        TextButton(
+                          child: Text('取消'),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        TextButton(
+                          child: Text('确定'),
+                          onPressed: () {
+                            setState(() {
+                              _pos = Offset(
+                                double.parse(posController.text),
+                                _pos.dy,
+                              );
+                            });
+                            _createSticker();
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+            title: Slider(
+              value: _pos.dx.clamp(-100, 300),
+              min: -100,
+              max: 300,
+              divisions: 400,
+              label: 'X轴位置: ${_pos.dx.round()}',
+              onChanged: (value) {
+                setState(() {
+                  _pos = Offset(value, _pos.dy);
+                });
+                _createSticker();
+              },
+            ),
+          ),
+          ListTile(
+            leading: InkWell(
+              child: Text('Y轴位置'),
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    final posController = TextEditingController();
+                    posController.text = _pos.dy.round().toString();
+                    return AlertDialog(
+                      title: Text('Y轴位置'),
+                      content: TextField(
+                        controller: posController,
+                        decoration: const InputDecoration(labelText: 'Y轴位置'),
+                      ),
+                      actions: [
+                        TextButton(
+                          child: Text('取消'),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        TextButton(
+                          child: Text('确定'),
+                          onPressed: () {
+                            setState(() {
+                              _pos = Offset(
+                                _pos.dx,
+                                double.parse(posController.text),
+                              );
+                            });
+                            _createSticker();
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+            title: Slider(
+              value: _pos.dy.clamp(-100, 300),
+              min: -100,
+              max: 300,
+              divisions: 400,
+              label: 'Y轴位置: ${_pos.dy.round()}',
+              onChanged: (value) {
+                setState(() {
+                  _pos = Offset(_pos.dx, value);
+                });
+                _createSticker();
+              },
+            ),
+          ),
+          ListTile(
+            leading: InkWell(
+              child: Text('字体大小'),
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    final fontSizeController = TextEditingController();
+                    fontSizeController.text = _fontSize.round().toString();
+                    return AlertDialog(
+                      title: Text('字体大小'),
+                      content: TextField(
+                        controller: fontSizeController,
+                        decoration: const InputDecoration(labelText: '字体大小'),
+                      ),
+                      actions: [
+                        TextButton(
+                          child: Text('取消'),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        TextButton(
+                          child: Text('确定'),
+                          onPressed: () {
+                            setState(() {
+                              _fontSize = double.parse(fontSizeController.text);
+                            });
+                            _createSticker();
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+            title: Slider(
+              value: _fontSize.clamp(00, 100),
+              min: 0,
+              max: 100,
+              divisions: 100,
+              label: '字体大小: ${_fontSize.round()}',
+              onChanged: (value) {
+                setState(() {
+                  _fontSize = value;
+                });
+                _createSticker();
+              },
+            ),
+          ),
           if (_byteData != null)
             ListTile(
               title: Image.memory(
@@ -462,8 +679,8 @@ class _StickerPageState extends State<StickerPage> {
               onTap: () async {
                 try {
                   // await Pasteboard.writeFiles([_byteData!]);
-                  await Pasteboard.writeImage(_byteData!);
-                  await Future.delayed(Duration(seconds: 1));
+                  // await Pasteboard.writeImage(_byteData!);
+                  // await Future.delayed(Duration(seconds: 1));
                   final File file = File(
                     '/storage/emulated/0/Pictures/pjsk_sticker/pjsk_${DateTime.now().millisecondsSinceEpoch}.png',
                   );
@@ -476,7 +693,10 @@ class _StickerPageState extends State<StickerPage> {
                   ).showSnackBar(SnackBar(content: Text('已复制图片到粘贴板并保存相册')));
                   if (Platform.isAndroid) {
                     await SharePlus.instance.share(
-                      ShareParams(files: [XFile(file.path)]),
+                      // ShareParams(files: [XFile(file.path)]),
+                      ShareParams(
+                        files: [XFile.fromData(_byteData!, path: file.path)],
+                      ),
                     );
                   }
                 } catch (e) {
