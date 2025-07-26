@@ -1,10 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:pasteboard/pasteboard.dart';
 import 'package:pjsk_sticker/pages/about.dart';
 import 'package:pjsk_sticker/sticker.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:pjsk_sticker/web_utils.dart'
+    if (dart.library.io) 'package:pjsk_sticker/web_utils_stub.dart';
 
 class StickerPage extends StatefulWidget {
   const StickerPage({super.key});
@@ -26,6 +30,7 @@ class _StickerPageState extends State<StickerPage> {
   Offset _pos = Offset(20, 10);
   double _fontSize = 42;
   int _edgeSize = 4;
+  double _lean = 15;
   // int _time = 0;
 
   @override
@@ -54,6 +59,7 @@ class _StickerPageState extends State<StickerPage> {
       pos: _pos,
       fontSize: _fontSize,
       edgeSize: _edgeSize,
+      lean: _lean,
     );
 
     // _time++;
@@ -197,169 +203,6 @@ class _StickerPageState extends State<StickerPage> {
       },
     );
   }
-
-  // Future<void> _selectCharacter1() async {
-  //   await showModalBottomSheet(
-  //     context: context,
-  //     builder: (context) {
-  //       return ListView.builder(
-  //         itemCount: PjskGenerator.groups.length + 1,
-  //         itemBuilder: (context, index) {
-  //           if (index == 0) {
-  //             final String group = "随机";
-  //             final Color color = Theme.of(context).colorScheme.primary;
-  //             final ThemeData theme = Theme.of(
-  //               context,
-  //             ).copyWith(colorScheme: ColorScheme.fromSeed(seedColor: color));
-  //             return RadioListTile<String>(
-  //               // ✅ 核心属性绑定
-  //               value: group,
-  //               groupValue: _selectedGroup,
-  //               onChanged: (val) {
-  //                 setState(() {
-  //                   _selectedGroup = val!;
-  //                   _character = val; // 直接赋值给最终显示的character
-  //                 });
-  //                 _createSticker();
-  //                 Navigator.pop(context); // 选择后关闭弹窗
-  //               },
-
-  //               // ✅ 视觉优化
-  //               title: Text(
-  //                 group,
-  //                 style: theme.textTheme.titleMedium!.copyWith(color: color),
-  //               ),
-  //               activeColor: Theme.of(context).colorScheme.primary,
-  //               // tileColor: Theme.of(context).colorScheme.surface,
-  //               contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-
-  //               // ✅ 主题继承
-  //               controlAffinity: ListTileControlAffinity.leading,
-  //               dense: true,
-  //               visualDensity: VisualDensity.compact,
-  //             );
-  //           }
-  //           index--;
-  //           final String group = PjskGenerator.groups[index];
-  //           final Color color = PjskGenerator.groupColor[group]!;
-  //           final ThemeData theme = Theme.of(
-  //             context,
-  //           ).copyWith(colorScheme: ColorScheme.fromSeed(seedColor: color));
-  //           return ListTile(
-  //             // ✅ 核心属性绑定
-  //             onTap: () async {
-  //               setState(() {
-  //                 _selectedGroup = group;
-  //               });
-  //               await _selectCharacter2();
-  //               if (_selected && mounted) {
-  //                 setState(() {});
-  //                 Navigator.pop(context); // 选择后关闭弹窗
-  //               }
-  //             },
-
-  //             // ✅ 视觉优化
-  //             title: Text(
-  //               group,
-  //               style: theme.textTheme.titleMedium!.copyWith(color: color),
-  //             ),
-  //             // activeColor: Theme.of(context).colorScheme.primary,
-  //             // tileColor: Theme.of(context).colorScheme.surface,
-  //             contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-
-  //             // ✅ 主题继承
-  //             // controlAffinity: ListTileControlAffinity.leading,
-  //             dense: true,
-  //             visualDensity: VisualDensity.compact,
-  //           );
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
-
-  // Future<void> _selectCharacter2() async {
-  //   await showModalBottomSheet(
-  //     context: context,
-  //     builder: (context) {
-  //       return ListView.builder(
-  //         itemCount: PjskGenerator.groupMembers[_selectedGroup!]!.length + 1,
-  //         itemBuilder: (context, index) {
-  //           if (index == 0) {
-  //             final String character = "$_selectedGroup随机";
-  //             final Color color = PjskGenerator.groupColor[_selectedGroup]!;
-  //             final ThemeData theme = Theme.of(
-  //               context,
-  //             ).copyWith(colorScheme: ColorScheme.fromSeed(seedColor: color));
-  //             return RadioListTile<String>(
-  //               // ✅ 核心属性绑定
-  //               value: character,
-  //               groupValue: _selectedCharacter,
-  //               onChanged: (val) {
-  //                 setState(() {
-  //                   _selectedCharacter = val!;
-  //                   _character = val; // 直接赋值给最终显示的character
-  //                 });
-  //                 _selected = true;
-  //                 _createSticker();
-  //                 Navigator.pop(context); // 选择后关闭弹窗
-  //               },
-
-  //               // ✅ 视觉优化
-  //               title: Text(
-  //                 character,
-  //                 style: theme.textTheme.titleMedium!.copyWith(color: color),
-  //               ),
-  //               activeColor: Theme.of(context).colorScheme.primary,
-  //               // tileColor: Theme.of(context).colorScheme.surface,
-  //               contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-
-  //               // ✅ 主题继承
-  //               controlAffinity: ListTileControlAffinity.leading,
-  //               dense: true,
-  //               visualDensity: VisualDensity.compact,
-  //             );
-  //           }
-  //           index--;
-  //           final String group = _selectedGroup!;
-  //           final String character = PjskGenerator.groupMembers[group]![index];
-  //           final String name = PjskGenerator.characterMap[character]!;
-  //           final Color color = PjskGenerator.characterColor[name]!;
-  //           final ThemeData theme = Theme.of(
-  //             context,
-  //           ).copyWith(colorScheme: ColorScheme.fromSeed(seedColor: color));
-  //           return ListTile(
-  //             onTap: () async {
-  //               setState(() {
-  //                 _selectedCharacter = character;
-  //               });
-  //               // _selected = true;
-  //               // _createSticker();
-  //               // Navigator.pop(context); // 选择后关闭弹窗
-  //               await _selectCharacter3();
-  //               if (_selected && mounted) {
-  //                 setState(() {});
-  //                 Navigator.pop(context); // 选择后关闭弹窗
-  //               }
-  //             },
-
-  //             // ✅ 视觉优化
-  //             title: Text(
-  //               character,
-  //               style: theme.textTheme.titleMedium!.copyWith(color: color),
-  //             ),
-  //             // tileColor: Theme.of(context).colorScheme.surface,
-  //             contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-
-  //             // ✅ 主题继承
-  //             dense: true,
-  //             visualDensity: VisualDensity.compact,
-  //           );
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
 
   Future<void> _selectCharacter3() async {
     _selectedSticker = -1;
@@ -668,6 +511,58 @@ class _StickerPageState extends State<StickerPage> {
               },
             ),
           ),
+          ListTile(
+            leading: InkWell(
+              child: Text('旋转角度'),
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    final leanController = TextEditingController();
+                    leanController.text = _lean.round().toString();
+                    return AlertDialog(
+                      title: Text('旋转角度'),
+                      content: TextField(
+                        controller: leanController,
+                        decoration: const InputDecoration(labelText: '字体大小'),
+                      ),
+                      actions: [
+                        TextButton(
+                          child: Text('取消'),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        TextButton(
+                          child: Text('确定'),
+                          onPressed: () {
+                            setState(() {
+                              _lean = double.parse(leanController.text);
+                            });
+                            _createSticker();
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+            title: Slider(
+              value: _lean.clamp(-180, 180),
+              min: -180,
+              max: 180,
+              divisions: 360,
+              label: '旋转角度: ${_lean.round()}',
+              onChanged: (value) {
+                setState(() {
+                  _lean = value;
+                });
+                _createSticker();
+              },
+            ),
+          ),
           if (_byteData != null)
             ListTile(
               title: Image.memory(
@@ -679,25 +574,48 @@ class _StickerPageState extends State<StickerPage> {
               onTap: () async {
                 try {
                   // await Pasteboard.writeFiles([_byteData!]);
-                  // await Pasteboard.writeImage(_byteData!);
                   // await Future.delayed(Duration(seconds: 1));
-                  final File file = File(
-                    '/storage/emulated/0/Pictures/pjsk_sticker/pjsk_${DateTime.now().millisecondsSinceEpoch}.png',
-                  );
-                  await file.create(recursive: true);
-                  // await _file!.copy(file.path);
-                  await file.writeAsBytes(_byteData!);
-                  // await Pasteboard.writeFiles([file.path]);
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text('已复制图片到粘贴板并保存相册')));
-                  if (Platform.isAndroid) {
+                  if (kIsWeb) {
+                    downloadImageWeb(_byteData!);
+                  } else if (Platform.isAndroid) {
+                    final File file = File(
+                      '/storage/emulated/0/Pictures/pjsk_sticker/pjsk_${DateTime.now().millisecondsSinceEpoch}.png',
+                    );
+                    await file.create(recursive: true);
+                    // await _file!.copy(file.path);
+                    await file.writeAsBytes(_byteData!);
+                    // await Pasteboard.writeFiles([file.path]);
                     await SharePlus.instance.share(
                       // ShareParams(files: [XFile(file.path)]),
                       ShareParams(
                         files: [XFile.fromData(_byteData!, path: file.path)],
                       ),
                     );
+                    if (mounted) {
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text('已将图片保存到相册')));
+                    }
+                  } else {
+                    final File file = File(
+                      'pjsk_sticker/pjsk_${DateTime.now().millisecondsSinceEpoch}.png',
+                    );
+                    await file.create(recursive: true);
+                    await file.writeAsBytes(_byteData!);
+                    if (Platform.isWindows) {
+                      print(file.path.replaceAll('/', '\\'));
+                      await Process.run('explorer.exe', [
+                        '/select,${file.path.replaceAll('/', '\\')}',
+                      ]);
+                      Pasteboard.writeFiles([file.path.replaceAll('/', '\\')]);
+                    } else {
+                      Pasteboard.writeFiles([file.path]);
+                    }
+                    if (mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('已复制图片到粘贴板并保存当前文件夹下')),
+                      );
+                    }
                   }
                 } catch (e) {
                   if (kDebugMode) {

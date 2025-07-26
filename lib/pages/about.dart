@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:ionicons/ionicons.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -12,12 +13,17 @@ class AboutPage extends StatefulWidget {
 
 class _AboutPageState extends State<AboutPage> {
   String? qq;
+  List<String> qqurls = [];
 
   @override
   void initState() {
     super.initState();
     getGroupNumber().then((value) {
-      qq = value.replaceAll("\n", "");
+      qq = value;
+      if (mounted) setState(() {});
+    });
+    getGroupUrls().then((value) {
+      qqurls = value;
       if (mounted) setState(() {});
     });
   }
@@ -27,15 +33,38 @@ class _AboutPageState extends State<AboutPage> {
       Uri.parse('https://xiaocaoooo.github.io/musiku/qq'),
     );
     if (response.statusCode == 200) {
-      return response.body.replaceAll("\n", "");
+      return response.body.trim();
     } else {
       throw Exception('Failed to load group number');
     }
   }
 
-  Future<void> toUri(Uri uri) async {
-    if (!await launchUrl(uri)) {
-      throw 'Could not launch $uri';
+  Future<List<String>> getGroupUrls() async {
+    final response = await http.get(
+      Uri.parse('https://xiaocaoooo.github.io/musiku/qqurl'),
+    );
+    if (response.statusCode == 200) {
+      return response.body.trim().split('\n');
+    } else {
+      throw Exception('Failed to load group number');
+    }
+  }
+
+  Future<void> toUris(List<Uri> uris, {String? message}) async {
+    for (var uri in uris) {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+        return;
+      }
+    }
+    if (mounted) {
+      if (message != null) {
+        Clipboard.setData(ClipboardData(text: message));
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('${message ?? uris.first} 链接打开失败')),
+      );
+      await launchUrl(uris.first);
     }
   }
 
@@ -86,11 +115,11 @@ class _AboutPageState extends State<AboutPage> {
               ],
             ),
             onTap: () {
-              toUri(
+              toUris([
                 Uri.parse(
                   "https://github.com/xiaocaoooo/pjsk-sticker/releases/",
                 ),
-              );
+              ]);
             },
           ),
           ListTile(
@@ -107,7 +136,7 @@ class _AboutPageState extends State<AboutPage> {
               ],
             ),
             onTap: () {
-              toUri(Uri.parse("https://github.com/xiaocaoooo/"));
+              toUris([Uri.parse("https://github.com/xiaocaoooo/")]);
             },
           ),
           ListTile(
@@ -124,7 +153,9 @@ class _AboutPageState extends State<AboutPage> {
               ],
             ),
             onTap: () {
-              toUri(Uri.parse("https://github.com/xiaocaoooo/pjsk-sticker/"));
+              toUris([
+                Uri.parse("https://github.com/xiaocaoooo/pjsk-sticker/"),
+              ]);
             },
           ),
           ListTile(
@@ -146,11 +177,12 @@ class _AboutPageState extends State<AboutPage> {
                   context,
                 ).showSnackBar(SnackBar(content: Text("正在获取QQ群号")));
               } else {
-                toUri(
+                toUris([
                   Uri.parse(
                     "mqqapi://card/show_pslcard?src_type=internal&version=1&uin=$qq&card_type=group&source=qrcode",
                   ),
-                );
+                  ...qqurls.map((url) => Uri.parse(url)),
+                ], message: qq);
               }
             },
           ),
@@ -177,7 +209,7 @@ class _AboutPageState extends State<AboutPage> {
               ],
             ),
             onTap: () {
-              toUri(Uri.parse("https://pjsekai.sega.jp/"));
+              toUris([Uri.parse("https://pjsekai.sega.jp/")]);
             },
           ),
           ListTile(
@@ -194,7 +226,7 @@ class _AboutPageState extends State<AboutPage> {
               ],
             ),
             onTap: () {
-              toUri(Uri.parse("https://github.com/flutter/flutter/"));
+              toUris([Uri.parse("https://github.com/flutter/flutter/")]);
             },
           ),
           ListTile(
@@ -211,11 +243,11 @@ class _AboutPageState extends State<AboutPage> {
               ],
             ),
             onTap: () {
-              toUri(
+              toUris([
                 Uri.parse(
                   "https://github.com/sszzz830/Project_Sekai_Stickers_QQBot/",
                 ),
-              );
+              ]);
             },
           ),
           ListTile(
@@ -232,11 +264,11 @@ class _AboutPageState extends State<AboutPage> {
               ],
             ),
             onTap: () {
-              toUri(
+              toUris([
                 Uri.parse(
                   "https://github.com/TheOriginalAyaka/sekai-stickers/",
                 ),
-              );
+              ]);
             },
           ),
         ],

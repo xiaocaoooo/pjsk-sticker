@@ -13,12 +13,14 @@ dependencies:
   flutter_colorpicker: ^1.0.3
   cupertino_icons: ^1.0.8
   dynamic_color: ^1.7.0
+  flutter_launcher_icons: ^0.14.4
   http: ^1.4.0
   ionicons: ^0.2.2
   path_provider: ^2.0.1
-  # pasteboard: ^0.4.0
-  url_launcher: ^6.3.2
+  pasteboard: ^0.4.0
   share_plus: ^11.0.0
+  url_launcher: ^6.3.2
+  web: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -29,6 +31,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/
     - assets/characters/airi/
     - assets/characters/akito/
     - assets/characters/an/
@@ -57,3 +60,19 @@ flutter:
     - assets/characters/tsukasa/
     - Fonts/ShangShouFangTangTi.ttf
     - Fonts/YurukaStd.ttf
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.png"
+  web:
+    generate: true
+    image_path: "assets/icon.png"
+    background_color: "#D481A9"
+    theme_color: "#39C5BB"
+  windows:
+    generate: true
+    image_path: "assets/icon.png"
+  macos:
+    generate: true
+    image_path: "assets/icon.png"
