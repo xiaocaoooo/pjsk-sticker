@@ -1,16 +1,26 @@
-# pjsk_sticker
+<img src="assets/icon.png" alt="Wonderhoy!" align=right />
+<div align="center">
 
-A new Flutter project.
+# Project Sekai Sticker
 
-## Getting Started
+<!-- ![Wonderhoy!](assets/icon.png) -->
 
-This project is a starting point for a Flutter application.
+_一个PJSK表情包生成器_
 
-A few resources to get you started if this is your first Flutter project:
+</div>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+> 资源来源于网络，仅供学习和交流使用，请在下载后 24 小时内删除。
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 链接
+
+[![QQ Group 1032106495](https://img.shields.io/badge/QQ%20Group%201032106495-加入群聊-blue)](https://qm.qq.com/q/kWarbQkuTm)
+
+- [在线体验](https://xiaocaoooo.github.io/pjsk-sticker/)
+- [Android/Windows下载](https://github.com/xiaocaoooo/pjsk-sticker/releases)
+
+## 致谢
+
+- [SEGA/プロセカ](https://pjsekai.sega.jp/)
+- [flutter/flutter](https://github.com/flutter/flutter/)
+- [sszzz830/Project_Sekai_Stickers_QQBot](https://github.com/sszzz830/Project_Sekai_Stickers_QQBot/)
+- [TheOriginalAyaka/sekai-stickers](https://github.com/TheOriginalAyaka/sekai-stickers/)
