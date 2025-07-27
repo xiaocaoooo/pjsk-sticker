@@ -33,7 +33,7 @@ jobs:
         run: flutter test
       
       - name: Build split ABI APKs
-        run: flutter build apk --split-per-abi --release
+        run: flutter build apk --split-per-abi --debug
       
       - name: Upload split APKs
         uses: actions/upload-artifact@v4
