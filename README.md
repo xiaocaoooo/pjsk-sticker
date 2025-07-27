@@ -24,7 +24,8 @@ _一个PJSK表情包生成器_
 [![QQ Group 1032106495](https://img.shields.io/badge/QQ%20Group%201032106495-加入群聊-blue)](https://qm.qq.com/q/kWarbQkuTm)
 
 - [在线体验](https://xiaocaoooo.github.io/pjsk-sticker/)
-- [Android/Windows下载](https://github.com/xiaocaoooo/pjsk-sticker/releases)
+- [Android/Windows 下载](https://github.com/xiaocaoooo/pjsk-sticker/releases)
+- 最新 Android APK 可以从 [GitHub Actions](https://github.com/xiaocaoooo/pjsk-sticker/actions/workflows/android.yml) 下载 (不稳定)
 
 ## 致谢
 
@@ -32,3 +33,7 @@ _一个PJSK表情包生成器_
 - [flutter/flutter](https://github.com/flutter/flutter/)
 - [sszzz830/Project_Sekai_Stickers_QQBot](https://github.com/sszzz830/Project_Sekai_Stickers_QQBot/)
 - [TheOriginalAyaka/sekai-stickers](https://github.com/TheOriginalAyaka/sekai-stickers/)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=xiaocaoooo/pjsk-sticker&type=Date)](https://www.star-history.com/#xiaocaoooo/pjsk-sticker&Date)
