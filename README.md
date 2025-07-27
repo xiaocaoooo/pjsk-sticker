@@ -7,6 +7,14 @@
 
 _一个PJSK表情包生成器_
 
+![stars](https://img.shields.io/github/stars/xiaocaoooo/pjsk-sticker?style=flat)
+![downloads](https://img.shields.io/github/downloads/xiaocaoooo/pjsk-sticker/total)
+![Github repo size](https://img.shields.io/github/repo-size/xiaocaoooo/pjsk-sticker)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xiaocaoooo/pjsk-sticker)](https://github.com/xiaocaoooo/pjsk-sticker/releases)
+[![GitHub Release Date](https://img.shields.io/github/release-date/xiaocaoooo/pjsk-sticker)](https://github.com/xiaocaoooo/pjsk-sticker/releases)
+![last commit](https://img.shields.io/github/last-commit/xiaocaoooo/pjsk-sticker?style=flat)
+![language](https://img.shields.io/badge/language-Python-blue)
+
 </div>
 
 > 资源来源于网络，仅供学习和交流使用，请在下载后 24 小时内删除。
