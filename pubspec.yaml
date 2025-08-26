@@ -2,7 +2,7 @@ name: pjsk_sticker
 description: "A new Flutter project."
 publish_to: "none"
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ^3.7.2
@@ -18,7 +18,9 @@ dependencies:
   ionicons: ^0.2.2
   path_provider: ^2.0.1
   pasteboard: ^0.4.0
+  permission_handler: ^11.3.1
   share_plus: ^11.0.0
+  shared_preferences: ^2.2.3
   url_launcher: ^6.3.2
   web: ^1.1.1
 
@@ -37,7 +39,7 @@ flutter:
     - assets/characters/an/
     - assets/characters/emu/
     - assets/characters/ena/
-    - assets/characters/haruka/
+    - assets/characters/haruki/
     - assets/characters/honami/
     - assets/characters/ichika/
     - assets/characters/kaito/

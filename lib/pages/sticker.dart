@@ -21,7 +21,7 @@ class _StickerPageState extends State<StickerPage> {
   );
   String? _selectedGroup;
   String? _selectedCharacter = "emu";
-  int _selectedSticker = 14;
+  int _selectedSticker = 12;
   bool _selected = false;
   String _character = "emu";
   Uint8List? _byteData;
@@ -250,11 +250,12 @@ class _StickerPageState extends State<StickerPage> {
                 itemBuilder: (context, index) {
                   final String stickerPath =
                       'assets/characters/$name/${PjskGenerator.characterStickers[name]![index]}'; // 贴纸资源路径
+                  // 修复RangeError：文件名格式为[name][index].png，需要正确解析索引
                   final int stickerIndex =
                       int.tryParse(
                         PjskGenerator.characterStickers[name]![index]
-                            .split('_')[1]
-                            .split('.')[0],
+                            .replaceAll(name, '') // 移除角色名称部分
+                            .split('.')[0],       // 获取数字部分
                       )!; // 贴纸索引
                   // 判断文件是否存在
                   return InkWell(

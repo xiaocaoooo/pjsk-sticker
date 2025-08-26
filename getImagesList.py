@@ -8,3 +8,7 @@ if __name__ == "__main__":
         if os.path.isdir("./assets/characters/"+i):
             res[i]=os.listdir("./assets/characters/"+i)
     print(res)
+    # counts={}
+    # for i in res:
+    #     counts[i]=len(res[i])
+    # print(counts)

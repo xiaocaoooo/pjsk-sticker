@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:pjsk_sticker/pages/sticker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPage extends StatefulWidget {
   const AppPage({super.key});
@@ -10,10 +11,31 @@ class AppPage extends StatefulWidget {
 
 class _AppPageState extends State<AppPage> {
   bool _first = true;
+  late SharedPreferences _prefs;
 
   @override
   void initState() {
     super.initState();
+    _checkFirstLaunch();
+  }
+
+  // 检查是否是首次启动
+  Future<void> _checkFirstLaunch() async {
+    _prefs = await SharedPreferences.getInstance();
+    final bool isFirstLaunch = _prefs.getBool('first_launch') ?? true;
+    
+    // 如果是首次启动，显示关于对话框
+    if (isFirstLaunch) {
+      setState(() {
+        _first = true;
+      });
+      // 标记为已启动过
+      await _prefs.setBool('first_launch', false);
+    } else {
+      setState(() {
+        _first = false;
+      });
+    }
   }
 
   @override
@@ -25,7 +47,6 @@ class _AppPageState extends State<AppPage> {
 
     Future.microtask(() {
       if (mounted && _first) {
-        _first = false;
         showAdaptiveDialog(
           context: context,
           builder: (context) {
