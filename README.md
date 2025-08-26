@@ -23,7 +23,6 @@ _一个PJSK表情包生成器_
 
 [![QQ Group 1032106495](https://img.shields.io/badge/QQ%20Group%201032106495-加入群聊-blue)](https://qm.qq.com/q/kWarbQkuTm)
 
-- [在线体验](https://xiaocaoooo.github.io/pjsk-sticker/)
 - [Android/Windows 下载](https://github.com/xiaocaoooo/pjsk-sticker/releases)
 - 最新 Android APK 可以从 [GitHub Actions](https://github.com/xiaocaoooo/pjsk-sticker/actions/workflows/android.yml) 下载 (不稳定)
 
