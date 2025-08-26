@@ -6,6 +6,7 @@ import 'package:pasteboard/pasteboard.dart';
 import 'package:pjsk_sticker/pages/about.dart';
 import 'package:pjsk_sticker/sticker.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pjsk_sticker/web_utils.dart'
     if (dart.library.io) 'package:pjsk_sticker/web_utils_stub.dart';
 
@@ -35,10 +36,52 @@ class _StickerPageState extends State<StickerPage> {
   @override
   void initState() {
     super.initState();
+    _loadPreferences();
+  }
+
+  // 从SharedPreferences加载参数
+  Future<void> _loadPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _contextController.text = prefs.getString('content') ?? "わんだほーい";
+      _selectedGroup = prefs.getString('selectedGroup');
+      _selectedCharacter = prefs.getString('selectedCharacter') ?? "emu";
+      _selectedSticker = prefs.getInt('selectedSticker') ?? 12;
+      _selected = prefs.getBool('selected') ?? false;
+      _character = prefs.getString('character') ?? "emu";
+      _font = prefs.getInt('font') ?? 0;
+      _pos = Offset(
+        prefs.getDouble('posX') ?? 20,
+        prefs.getDouble('posY') ?? 10,
+      );
+      _fontSize = prefs.getDouble('fontSize') ?? 42;
+      _edgeSize = prefs.getInt('edgeSize') ?? 4;
+      _lean = prefs.getDouble('lean') ?? 15;
+    });
     _createSticker();
   }
 
+  // 保存参数到SharedPreferences
+  Future<void> _savePreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('content', _contextController.text);
+    await prefs.setString('selectedGroup', _selectedGroup ?? '');
+    await prefs.setString('selectedCharacter', _selectedCharacter ?? 'emu');
+    await prefs.setInt('selectedSticker', _selectedSticker);
+    await prefs.setBool('selected', _selected);
+    await prefs.setString('character', _character);
+    await prefs.setInt('font', _font);
+    await prefs.setDouble('posX', _pos.dx);
+    await prefs.setDouble('posY', _pos.dy);
+    await prefs.setDouble('fontSize', _fontSize);
+    await prefs.setInt('edgeSize', _edgeSize);
+    await prefs.setDouble('lean', _lean);
+  }
+
   Future<void> _createSticker() async {
+    // 先保存参数
+    await _savePreferences();
+    
     String content = _contextController.text;
     String character = _character != "随机" ? _character : "";
     if (PjskGenerator.groups.contains(character)) {
